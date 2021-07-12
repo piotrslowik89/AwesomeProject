@@ -4,6 +4,34 @@ yarn run android
 
 ---
 
+# prettier
+
+# eslint plugin for react-native
+
+yarn add -D eslint-plugin-react
+
+yarn add -D eslint-plugin-react-native
+
+# husky
+
+yarn add -D husky
+aby zapobiec wypchnięcia niepoprawnych commitów
+
+# prety quick
+
+yarn add -D pretty-quick
+jest w stanie dodać linter i dodać do stagowanych plików
+
+// przed commitem wykorzystujemy prety quicka
+
+do package jason dodajemy
+"husky": {
+"hooks": {
+"pre-commit": "pretty-quick -staged && yarn run lint"
+}
+}
+}
+
 yarn add styled-components
 
 debugger
@@ -15,7 +43,7 @@ Ctrl+M
 
 Run react-devtools from the terminal to launch the standalone DevTools app:
 
-# react-devtools
+# react-native-debugger/
 
 https://github.com/jhen0409/react-native-debugger/releases
 
@@ -57,4 +85,5 @@ yarn add @react-native-firebase/auth
 yarn run build
 
 # react-hook-form
+
 yarn add react-hook-form
