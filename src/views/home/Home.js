@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { LangContext } from '../../lang/LangProvider';
 import { LANGUAGES } from '../../lang/constans';
 
-export default function HomeView() {
+export default function HomeView({ navigation }) {
   const [lang, handleChangeLanguage] = useContext(LangContext);
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -20,7 +20,7 @@ export default function HomeView() {
           )
         }
       />
-      <Button title={'clear'} onPress={() => removeItem('preferences:lang')} />
+      <Button title={'Go Back'} onPress={() => navigation.goBack()} />
     </View>
   );
 }
