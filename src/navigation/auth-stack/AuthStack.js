@@ -11,7 +11,9 @@ const Stack = createStackNavigator();
 
 export default function AuthStack() {
   return (
-    <Stack.Navigator initialRouteName={SCREENS.AUTH.ONBOARDING.ID}>
+    <Stack.Navigator
+      initialRouteName={SCREENS.AUTH.ONBOARDING.ID}
+      screenOptions={{ headerShown: false }}>
       <Stack.Screen name={SCREENS.AUTH.ONBOARDING.ID} component={OnBoarding} />
       <Stack.Screen name={SCREENS.AUTH.SIGN_UP.ID} component={SignupScreen} />
       <Stack.Screen name={SCREENS.AUTH.LOGIN.ID} component={LoginScreen} />
