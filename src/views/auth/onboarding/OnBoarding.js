@@ -16,6 +16,8 @@ import { SCREENS } from '../../../navigation/constans';
 import { FormattedMessage } from 'react-intl';
 import Pagination from '../../../components/pagination';
 
+import SkillsIcon from '../../../assets/svg/onboarding-screen/skills.svg';
+
 const styles = StyleSheet.create({
   root: {
     height: '100%',
@@ -79,6 +81,7 @@ export default function OnBoarding({ navigation }) {
             />
           </Text>
         </View>
+        <SkillsIcon />
         <Pagination />
         <View>
           <Button
