@@ -5,7 +5,7 @@ import OnBoarding from '../../views/auth/onboarding';
 import LoginScreen from '../../views/auth/login';
 import SignupScreen from '../../views/auth/signup';
 
-import { SCREENS } from '../constans';
+import { SCREENS } from '../constants';
 
 const Stack = createStackNavigator();
 

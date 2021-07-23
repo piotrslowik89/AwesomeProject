@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function TextButton({
   label,
-  onPress = () => {
-    undefined;
-  },
+  onPress = () => undefined,
   TextProps = {},
   TouchableProps = {},
 }) {

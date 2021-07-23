@@ -3,7 +3,7 @@ import { IntlProvider } from 'react-intl';
 import * as RNLocalize from 'react-native-localize';
 
 import { getMessages } from './utils';
-import { LANGUAGES, LangContextName } from './constans';
+import { LANGUAGES, LangContextName } from './constants';
 import { getItem, setItem } from '../utils/asyncStorage';
 
 export const LangContext = createContext();
@@ -12,8 +12,6 @@ LangContext.displayName = LangContextName;
 const lc_lang_key = 'preferences:lang';
 
 export function LangModeProvider(props) {
-  console.log('props', props);
-
   const [lang, setLang] = useState(LANGUAGES.ENG);
 
   useEffect(() => {
@@ -34,13 +32,16 @@ export function LangModeProvider(props) {
     })();
   }, [lang]);
 
+  /**
+   *
+   * @param {string} newLang
+   */
   async function switchLang(newLang) {
     await setItem(lc_lang_key, newLang);
     setLang(newLang);
   }
-  const value = [lang, switchLang];
 
-  console.log('props', props);
+  const value = [lang, switchLang];
 
   return <LangContext.Provider value={value} {...props} />;
 }

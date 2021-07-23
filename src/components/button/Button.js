@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { colors, constants, spacing, typography } from '../../styles';
+import GoForward from '../../assets/svg/icons/Go-forward.svg';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,21 +16,37 @@ const styles = StyleSheet.create({
   label: {
     ...typography.FONT_BOLD,
   },
+  actionContainer: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  leftActionContainer: {
+    alignItems: 'flex-start',
+  },
 });
 
-export default function Button({ label, isChevronDisplayed = false }) {
+export default function Button({
+  onPress,
+  label,
+  isChevronDisplayed = false,
+  activeOpacity = 0.5,
+}) {
   return (
-    <TouchableOpacity activeOpacity={0.5}>
+    <TouchableOpacity activeOpacity={activeOpacity} onPress={onPress}>
       <View style={styles.container}>
-        <View />
+        <View style={[styles.actionContainer, styles.leftActionContainer]} />
         <Text style={styles.label}>{label}</Text>
-        <View>{isChevronDisplayed}</View>
+        <View style={styles.actionContainer}>
+          {isChevronDisplayed && <GoForward />}
+        </View>
       </View>
     </TouchableOpacity>
   );
 }
 
-Button.PropTypes = {
+Button.propTypes = {
   label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   isChevronDisplayed: PropTypes.bool,
+  onPress: PropTypes.func,
+  activeOpacity: PropTypes.number,
 };

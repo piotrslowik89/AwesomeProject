@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
+
 import { colors, spacing } from '../../styles';
 
 const styles = StyleSheet.create({
@@ -22,22 +23,20 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Pagination({ pages = 0, activePage = 0 }) {
+export default function Pagination({ pages = [], activePage }) {
   return (
     <View style={styles.container}>
-      {new Array(pages).fill(null).map((page, index) => (
+      {pages.map((page, index) => (
         <View
-          key={'page-${index}'}
-          style={[
-            styles.dot,
-            index === activePage ? styles.activeDot : {},
-          ]}></View>
+          key={page.id}
+          style={[styles.dot, index === activePage ? styles.activeDot : {}]}
+        />
       ))}
     </View>
   );
 }
 
 Pagination.propTypes = {
-  pages: PropTypes.number.isRequired,
+  pages: PropTypes.arrayOf(PropTypes.object),
   activePage: PropTypes.number.isRequired,
 };
