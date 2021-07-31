@@ -87,3 +87,9 @@ yarn run build
 # react-hook-form
 
 yarn add react-hook-form
+
+# YUP
+
+yarn add yup
+
+yarn add @hookform/resolvers

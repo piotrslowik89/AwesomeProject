@@ -1,6 +1,6 @@
 import React, { useState, createContext } from 'react';
-import PropTypes from 'prop-types';
 import auth from '@react-native-firebase/auth';
+import PropTypes from 'prop-types';
 
 export const AuthContext = createContext({});
 
@@ -15,17 +15,12 @@ export function AuthProvider({ children }) {
         login: async (email, password) => {
           try {
             await auth().signInWithEmailAndPassword(email, password);
-          } catch (e) {
-            alert(e);
-          }
+          } catch (e) {}
         },
         register: async (email, password) => {
           try {
             await auth().createUserWithEmailAndPassword(email, password);
-            alert('done');
-          } catch (e) {
-            alert(e);
-          }
+          } catch (e) {}
         },
         logout: async () => {
           try {

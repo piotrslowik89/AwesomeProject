@@ -1,43 +1,30 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
-import { useForm } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { View, Text, SafeAreaView } from 'react-native';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import Button from '../../../components/button';
 import TextField from '../../../components/text-field';
 
 import { AuthContext } from '../../../navigation/AuthProvider';
-import { colors, spacing, typography } from '../../../styles';
 import IconButton from '../../../components/icon-button';
 import GoBackIcon from '../../../assets/svg/icons/Go-back.svg';
 
-const styles = StyleSheet.create({
-  root: {
-    height: '100%',
-  },
-  title: {
-    ...typography.FONT_BOLD,
-    textAlign: 'center',
-    fontSize: typography.FONT_SIZE_18,
-    paddingVertical: spacing.SCALE_8,
-  },
-  subTitle: {
-    textAlign: 'center',
-    color: colors.ADDITIONAL_COLORS.TEXT.HINT,
-    paddingVertical: spacing.SCALE_8,
-  },
-  actionContainer: {
-    alignItems: 'flex-start',
-  },
-  container: {
-    paddingVertical: spacing.SCALE_18,
-    paddingHorizontal: spacing.SCALE_18,
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-});
+import { schema } from './validationSchema';
+import { styles } from './Signup.styles';
 
-export default function SignupScreen(navigation) {
+export default function SignupScreen({ navigation }) {
   const { register } = useContext(AuthContext);
+
+  const { control, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  function onSubmit({ email, password }) {
+    try {
+      register(email, password);
+    } catch (e) {}
+  }
 
   return (
     <SafeAreaView style={styles.root}>
@@ -55,11 +42,60 @@ export default function SignupScreen(navigation) {
           </Text>
         </View>
         <View>
-          <TextField label={'Email Adress'} />
-          <TextField label={'Password'} />
-          <TextField label={' Confirm Password'} />
+          <Controller
+            name={'email'}
+            control={control}
+            defaultValue={''}
+            render={({ onChange, onBlur, value }) => (
+              <TextField
+                autoCapitalize={'none'}
+                label={'Email Address'}
+                value={value}
+                onBlur={onBlur}
+                onChangeText={(newValue) => onChange(newValue)}
+                error={errors.email}
+              />
+            )}
+          />
+          <Controller
+            name={'password'}
+            control={control}
+            defaultValue={''}
+            autoCapitalize={'none'}
+            render={({ onChange, onBlur, value }) => (
+              <TextField
+                secureTextEntry={true}
+                label={'Password'}
+                value={value}
+                onBlur={onBlur}
+                onChangeText={(newValue) => onChange(newValue)}
+                error={errors.password}
+              />
+            )}
+          />
+          <Controller
+            name={'confirmPassword'}
+            control={control}
+            defaultValue={''}
+            autoCapitalize={'none'}
+            render={({ onChange, onBlur, value }) => (
+              <TextField
+                autoCompleteType="off"
+                secureTextEntry={true}
+                label={'Confirm Password'}
+                value={value}
+                onBlur={onBlur}
+                onChangeText={(newValue) => onChange(newValue)}
+                error={errors.confirmPassword}
+              />
+            )}
+          />
         </View>
-        <Button label={'Create Account'} isChevronDisplayed={true} />
+        <Button
+          label={'Create Account'}
+          isChevronDisplayed={true}
+          onPress={handleSubmit(onSubmit)}
+        />
       </View>
     </SafeAreaView>
   );
