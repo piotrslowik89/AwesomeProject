@@ -1,19 +1,19 @@
 import React, { useContext } from 'react';
-import { View, Text, Button } from 'react-native';
+import { Text, Button, SafeAreaView } from 'react-native';
 
 import { AuthContext } from '../../../navigation/AuthProvider';
 
+// @TODO Implement login screen. Mocked login
 export default function LoginScreen() {
   const { login } = useContext(AuthContext);
+
   return (
-    <View>
+    <SafeAreaView>
       <Text>LoginScreen</Text>
       <Button
         title={'login'}
-        onPress={() => {
-          login('xx@xx.xx', 'somepass');
-        }}
+        onPress={() => login('email@lh.lh', 'password')}
       />
-    </View>
+    </SafeAreaView>
   );
 }

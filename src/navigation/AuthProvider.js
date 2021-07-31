@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
             await auth().signOut();
           } catch (e) {}
         },
-        resetPassword: async email => {
+        resetPassword: async (email) => {
           try {
             await auth().sendPasswordResetEmail(email);
           } catch (e) {}
